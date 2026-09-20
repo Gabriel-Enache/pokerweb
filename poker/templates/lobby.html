@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poker Lobby</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+</head>
+<body class="lobby-body">
+    <div class="lobby-container">
+        <div class="lobby-header">
+            <h1> Poker Lobby</h1>
+            <span class="player-name">Playing as: <strong>{{ name }}</strong></span>
+        </div>
+
+        <!-- create game panel -->
+        <div class="create-panel">
+            <h2>Create Game</h2>
+            <div class="create-form">
+                <div class="form-row">
+                    <label>Variant</label>
+                    <select id="create-variant">
+                        <option value="TexasHoldEm">Texas Hold'Em</option>
+                        <option value="Omaha">Omaha</option>
+                        <option value="FiveCardDraw">Five Card Draw</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label>Buy In</label>
+                    <input type="number" id="create-buyin" value="1000" min="100" step="100">
+                </div>
+                <div class="form-row">
+                    <label>Small Blind</label>
+                    <input type="number" id="create-sb" value="5" min="1">
+                </div>
+                <div class="form-row">
+                    <label>Big Blind</label>
+                    <input type="number" id="create-bb" value="10" min="2">
+                </div>
+                <div class="form-row">
+                    <label>Max Players</label>
+                    <select id="create-max">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6" selected>6</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label>Time Control (s)</label>
+                    <input type="number" id="create-time" value="30" min="10" max="120">
+                </div>
+                <div class="form-row">
+                    <label>Password</label>
+                    <input type="text" id="create-password" placeholder="Leave empty for public">
+                </div>
+                <button id="create-btn">Create Game</button>
+            </div>
+        </div>
+
+        <!-- games list-->
+        <div class="games-panel">
+            <h2>Available Games</h2>
+            <div id="games-list" class="games-list">
+                <p class="no-games">No games available. Create one!</p>
+            </div>
+        </div>
+
+        <!-- password modal -->
+        <div id="password-modal" class="modal hidden">
+            <div class="modal-content">
+                <h3>Enter Password</h3>
+                <input type="password" id="modal-password" placeholder="Password">
+                <div class="modal-buttons">
+                    <button id="modal-join">Join</button>
+                    <button id="modal-cancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/lobby.js') }}"></script>
+</body>
+</html>

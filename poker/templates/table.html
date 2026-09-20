@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poker Table</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+</head>
+<body class="table-body">
+    <div class="table-wrapper">
+        <!-- back button -->
+        <a href="/lobby" class="back-btn">Lobby</a>
+
+        <!-- poker table -->
+        <div class="poker-table-container">
+            <div class="poker-table">
+                <div class="table-felt">
+                    <!-- community cards -->
+                    <div class="community-cards" id="community-cards"></div>
+                    <!-- pot display -->
+                    <div class="pot-display" id="pot-display">Pot: 0</div>
+                    <!-- phase display -->
+                    <div class="phase-display" id="phase-display"></div>
+                </div>
+                <!-- player seats (positioned around ellipse) -->
+                <div id="seats-container"></div>
+            </div>
+        </div>
+
+        <!-- controls -->
+        <div class="controls-container" id="controls-container">
+            <div class="controls-row">
+                <button id="btn-fold" class="action-btn fold-btn" disabled>Fold</button>
+                <button id="btn-check" class="action-btn check-btn" disabled>Check</button>
+                <button id="btn-call" class="action-btn call-btn" disabled>Call</button>
+                <button id="btn-allin" class="action-btn allin-btn" disabled>All In</button>
+            </div>
+            <div class="controls-row raise-row">
+                <input type="range" id="raise-slider" min="0" max="1000" value="0" disabled>
+                <input type="number" id="raise-amount" value="0" min="0" disabled>
+                <button id="btn-raise" class="action-btn raise-btn" disabled>Raise</button>
+            </div>
+            <div class="controls-row">
+                <button id="btn-start" class="action-btn start-btn">Start Round</button>
+            </div>
+            <!-- draw controls for five card draw -->
+            <div class="controls-row draw-row hidden" id="draw-controls">
+                <span>Select cards to discard, then:</span>
+                <button id="btn-draw" class="action-btn draw-btn">Draw</button>
+            </div>
+        </div>
+
+        <!-- chat & emoji -->
+        <div class="side-panel">
+            <div class="chat-container">
+                <h3>Chat</h3>
+                <div id="chat-messages" class="chat-messages"></div>
+                <div class="chat-input-row">
+                    <input type="text" id="chat-input" placeholder="Type message..." maxlength="200">
+                    <button id="chat-send">Send</button>
+                </div>
+            </div>
+            <div class="emoji-container">
+                <h3>Emoji</h3>
+                <div class="emoji-grid" id="emoji-grid">
+                    <span class="emoji-btn" data-emoji="😀">😀</span>
+                    <span class="emoji-btn" data-emoji="😎">😎</span>
+                    <span class="emoji-btn" data-emoji="🤔">🤔</span>
+                    <span class="emoji-btn" data-emoji="😤">😤</span>
+                    <span class="emoji-btn" data-emoji="😂">😂</span>
+                    <span class="emoji-btn" data-emoji="🃏">🃏</span>
+                    <span class="emoji-btn" data-emoji="💰">💰</span>
+                    <span class="emoji-btn" data-emoji="🔥">🔥</span>
+                    <span class="emoji-btn" data-emoji="👍">👍</span>
+                    <span class="emoji-btn" data-emoji="👎">👎</span>
+                    <span class="emoji-btn" data-emoji="😢">😢</span>
+                    <span class="emoji-btn" data-emoji="🎉">🎉</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const GAME_INDEX = "{{ game_index }}";
+        const PLAYER_NAME = "{{ name }}";
+    </script>
+    <script src="{{ url_for('static', filename='js/table.js') }}"></script>
+</body>
+</html>
