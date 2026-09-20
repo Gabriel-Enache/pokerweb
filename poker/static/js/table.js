@@ -356,7 +356,7 @@ function updateControls() {
     }
 }
 
-// ACTION BUTTONS
+// player action buttons
 document.getElementById("btn-fold").addEventListener("click", function() {
     socket.emit("player_action", { action: "fold" });
 });
@@ -388,7 +388,7 @@ document.getElementById("btn-draw").addEventListener("click", function() {
     selectedDrawCards.clear();
 });
 
-// CHAT
+// player chat
 document.getElementById("chat-send").addEventListener("click", function() {
     var input = document.getElementById("chat-input");
     var msg = input.value.trim();
@@ -404,14 +404,14 @@ document.getElementById("chat-input").addEventListener("keydown", function(e) {
     }
 });
 
-// EMOJIS
+// player emojis
 document.querySelectorAll(".emoji-btn").forEach(function(btn) {
     btn.addEventListener("click", function() {
         socket.emit("set_emoji", { emoji: btn.dataset.emoji });
     });
 });
 
-// SLIDER
+// raise slider
 document.getElementById("raise-slider").addEventListener("input", function(e) {
     document.getElementById("raise-amount").value = e.target.value;
 });
