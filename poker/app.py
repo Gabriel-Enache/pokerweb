@@ -5,6 +5,7 @@ import time
 import threading
 
 app = Flask(__name__)
+# edit the key or randomise for a proper secret key
 app.secret_key = "poker_secret_key_change_this"
 socketio = SocketIO(app, cors_allowed_origins="*", manage_session=False)
 
